@@ -1,13 +1,15 @@
-package Utils;
+package dao;
 import java.sql.*;
 import java.util.*;
 
+import pojo.*;
+
 public class ConnectorUtil {
 
-	private static String dbDriver = "com.mysql.cj.jdbc.Driver";
-	private static String dbUrl = "jdbc:mysql://localhost:3306/parttime_system?&useSSL=false";
-	private static String username = "root";
-	private static String password = "aini119120";
+	private static final String dbDriver = "com.mysql.cj.jdbc.Driver";
+	private static final String dbUrl = "jdbc:mysql://localhost:3306/parttime_system?&useSSL=false";
+	private static final String username = "root";
+	private static final String password = "aini119120";
 	public static Connection conn = null;
 	
 	/**
@@ -91,6 +93,48 @@ public class ConnectorUtil {
 		}
 		
 		return list;
+	}
+	
+	public static List<Userinfo> queryAccoutInfo(String sql){
+		List<Userinfo> userList = new ArrayList();
+		Connection conn = getConn(null,null,null);
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ResultSetMetaData md = rs.getMetaData();
+			int size = md.getColumnCount();
+			while(rs.next()) {
+				
+				Userinfo one = new Userinfo(rs.getInt("id"),
+						rs.getString("account"),
+						rs.getString("password"),
+						rs.getString("type"),
+						rs.getString("name"),
+						rs.getString("matriculation_no"),
+						rs.getString("gender"),
+						rs.getInt("age"),
+						rs.getString("nationality"),
+						rs.getInt("yearOfStudy"),
+						rs.getString("finNo"),
+						rs.getString("email"),
+						rs.getString("phoneNumber"),
+						rs.getString("degree"),
+						rs.getString("remark"),
+						rs.getString("program"),
+						rs.getString("experience"));
+				
+				userList.add(one);
+				
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return userList;
 	}
 	
 	public static void main(String[] args) {
