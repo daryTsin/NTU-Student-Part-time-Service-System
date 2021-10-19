@@ -1,23 +1,23 @@
 package pojo;
 
 public class Userinfo {
-	int id;
-	String account;
-	String password;
-	String type;
-	String name;
-	String matriculationNo;
-	String gender;
-	int age;
-	String nationality;
-	int yearOfStudy;
-	String finNo;
-	String email;
-	String phoneNumber;
-	String degree;
-	String remark;
-	String program;
-	String experience;
+	public int id;
+	public String account;
+	public String password;
+	public String type;
+	public String name;
+	public String matriculationNo;
+	public String gender;
+	public int age;
+	public String nationality;
+	public int yearOfStudy;
+	public String finNo;
+	public String email;
+	public String phoneNumber;
+	public String degree;
+	public String remark;
+	public String program;
+	public String experience;
 	
 	public Userinfo(int id,
 	    String account,

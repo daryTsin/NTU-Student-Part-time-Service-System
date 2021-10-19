@@ -4,7 +4,7 @@ import java.util.*;
 
 import pojo.*;
 
-public class ConnectorUtil {
+public class UserinfoDao {
 
 	private static final String dbDriver = "com.mysql.cj.jdbc.Driver";
 	private static final String dbUrl = "jdbc:mysql://localhost:3306/parttime_system?&useSSL=false";
@@ -134,7 +134,31 @@ public class ConnectorUtil {
 			e.printStackTrace();
 		}
 		
+		closeConn(rs,ps,conn);
+		
 		return userList;
+	}
+	
+	public static boolean updateUser(String sql) {
+		boolean res = true;
+		Connection conn = getConn(null,null,null);
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		closeConn(rs,ps,conn);
+		
+		
+		return res;
+		
 	}
 	
 	public static void main(String[] args) {
