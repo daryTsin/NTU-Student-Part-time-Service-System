@@ -1,22 +1,23 @@
 package pojo;
 
 public class OrderInfo {
-	int orderId;
-	int merchantId;
-	String title;
-	String content;
-	String location;
-	String postCode;
-	String workPeriod;
-	String publishTime;
-	Double salary;
-	String type;
-	int staffNumber;
-	String deadline;
+	public int orderId;
+	public int merchantId;
+	public String title;
+	public String content;
+	public String location;
+	public String postCode;
+	public String workPeriod;
+	public String publishTime;
+	public Double salary;
+	public String type;
+	public int staffNumber;
+	public String deadline;
+	public String status;
 	
-	OrderInfo(int id, int merchantId,String title,String content,String location,
+	public OrderInfo(int id, int merchantId,String title,String content,String location,
 			String postCode,String workPeriod,String publishTime,Double salary,String type,
-			int staffNumber,String deadline){
+			int staffNumber,String deadline,String status){
 		this.orderId = id;
 		this.merchantId = merchantId;
 		this.title = title;
@@ -29,6 +30,7 @@ public class OrderInfo {
 		this.type = type;
 		this.staffNumber = staffNumber;
 		this.deadline = deadline;
+		this.status = status;
 		
 	}
 

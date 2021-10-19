@@ -7,7 +7,7 @@ public class StudentApplyInfo {
 	String status;
 	String remark;
 	
-	StudentApplyInfo(int id,int studentId,int orderId,String status,String remark){
+	public StudentApplyInfo(int id,int studentId,int orderId,String status,String remark){
 		this.id = id;
 		this.studentId = studentId;
 		this.orderId = orderId;
