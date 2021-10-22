@@ -1,5 +1,6 @@
 package service;
 import dao.ApplyOrderDao;
+import dao.CollectOrderDao;
 import dao.UserinfoDao;
 import dao.OrderInfoDao;
 import pojo.*;
@@ -131,6 +132,110 @@ public class OrderService {
 		}
 		
 	}
+	
+	public static String collectOrder(int studentId,int orderId) {
+		String str = "收藏订单";
+		String query = "SELECT * FROM " + TableName.COLLECT_ORDER_INFO
+				+ "WHERE student_id = " + studentId;
+		
+		List<CollectOrderInfo> list = CollectOrderDao.queryOrderByStudent(query);
+		String sql = "INSERT INTO " +TableName.COLLECT_ORDER_INFO
+				+ " (student_id,order_id) VALUES ("
+				+ studentId + "," + orderId +")";
+		
+		for(CollectOrderInfo one:list) {
+			if(one.orderId == orderId) {
+				sql = "DELETE FROM " + TableName.COLLECT_ORDER_INFO
+						+"WHERE student_id = " + studentId
+						+"AND order_id = " + orderId;
+				str = "取消收藏订单";
+				break;
+			}
+		}
+		boolean res = CollectOrderDao.updateOrder(sql);
+		
+		if(res) {
+			return str+"成功";
+		}else {
+			return str+"失败";
+		}
+	}
 
+	/**
+	 * 商家获取已发布订单情况，支持状态、类型筛选，以及搜索title和content
+	 * @param merchantId
+	 * @param status
+	 * @param type
+	 * @param search
+	 * @return
+	 */
+	public static List<OrderInfo> getOrderByCondition(int merchantId,String status,String type,String search){
+		String sql = "SELECT * FROM " + TableName.ORDER_INFO + "WHERE merchant_id ="
+				+ merchantId;
+		if(status != null && !"".equals(status)) {
+			sql = sql + "AND status = " + status;
+		}
+		if(type != null && !"".equals(type)) {
+			sql = sql + "AND type = " + type;
+		}
+		if(search != null && !"".equals(search)) {
+			sql = sql + "AND (title like %" + search +"% OR content like %" + search+"%)";
+		}
+		
+		List<OrderInfo> orders = OrderInfoDao.queryOrderInfo(sql);
+		
+		return orders;
+		
+		
+	}
+	
+	/**
+	 * 查询指定商家下面指定状态的申请学生信息
+	 * @param merchantId
+	 * @param status
+	 * @return
+	 */
+	public static List<StudentApplyInfo> getApplyStudentByMerchant(int merchantId,String status){
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT a.*,b.* c.* FROM ")
+		  .append(TableName.USER_INFO)
+		  .append(" as a ,  ")
+		  .append(TableName.STUDENT_APPLY_INFO)
+		  .append(" as b , ")
+		  .append(TableName.ORDER_INFO)
+		  .append(" as c ")
+		  .append(" WHERE a.id = b.student_id AND  c.merchant_id = ")
+		  .append(merchantId)
+		  .append(" AND b.order_id = c.id");
+		
+		if(status != null && !"".equals(status)) {
+			sql.append(" AND a.status = ")
+			  .append(status);
+		}
+		
+		List<StudentApplyInfo> users = ApplyOrderDao.queryOrderInfo(sql.toString());
+		
+		return users;
+	}
+	
+	public static String updateApplication(int studentId,int orderId,String status) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE ")
+		  .append(TableName.STUDENT_APPLY_INFO)
+		  .append(" SET status = ")
+		  .append(status)
+		  .append(" WHERE student_id = ")
+		  .append(studentId)
+		  .append(" AND order_id = ")
+		  .append(orderId);
+		
+		boolean res = ApplyOrderDao.updateOrder(sql.toString());
+		
+		if(res) {
+			return "success";
+		}else {
+			return "更新状态失败";
+		}
+	}
 
 }

@@ -8,12 +8,13 @@ import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
-import config.*;
-import java.util.*;
+import config.Constants;
+import config.TableName;
 import pojo.*;
 
+//收藏订单相关数据库操作
+public class CollectOrderDao {
 
-public class ApplyOrderDao {
 	/**
 	 * 获取数据库连接
 	 */
@@ -70,72 +71,12 @@ public class ApplyOrderDao {
 		
 	}
 	
-	public static List<StudentApplyInfo> queryOrderInfo(String sql){
-		List<StudentApplyInfo> orderList = new ArrayList();
-		Connection conn = getConn(null,null,null);
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		try {
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			ResultSetMetaData md = rs.getMetaData();
-			int size = md.getColumnCount();
-			while(rs.next()) {
-				
-				StudentApplyInfo one = new StudentApplyInfo(rs.getInt("id"),
-						rs.getInt("student_id"),
-						rs.getInt("order_id"),
-						rs.getString("status"),
-						rs.getString("remark"));
-				
-				Userinfo student = new Userinfo(rs.getInt("id"),
-						rs.getString("account"),
-						rs.getString("password"),
-						rs.getString("type"),
-						rs.getString("name"),
-						rs.getString("matriculation_no"),
-						rs.getString("gender"),
-						rs.getInt("age"),
-						rs.getString("nationality"),
-						rs.getInt("yearOfStudy"),
-						rs.getString("finNo"),
-						rs.getString("email"),
-						rs.getString("phoneNumber"),
-						rs.getString("degree"),
-						rs.getString("remark"),
-						rs.getString("program"),
-						rs.getString("experience"));
-				OrderInfo order = new OrderInfo(rs.getInt("id"),
-						rs.getInt("merchant_id"),
-						rs.getString("title"),
-						rs.getString("content"),
-						rs.getString("location"),
-						rs.getString("post_code"),
-						rs.getString("work_period"),
-						rs.getString("publish_time"),
-						rs.getDouble("salary"),
-						rs.getString("type"),
-						rs.getInt("staff_number"),
-						rs.getString("deadline"),
-						rs.getString("status"));
-				
-				one.studentInfo = student;
-				one.orderInfo = order;
-				
-				orderList.add(one);
-				
-			}
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		closeConn(rs,ps,conn);
-		
-		return orderList;
-	}
 	
+	/**
+	 * 新增收藏订单或者取消收藏订单
+	 * @param sql
+	 * @return
+	 */
 	public static boolean updateOrder(String sql) {
 		boolean res = true;
 		Connection conn = getConn(null,null,null);
@@ -158,20 +99,34 @@ public class ApplyOrderDao {
 		
 	}
 	
-	public static List<Integer> getStudentOrderId(int studentId){
-		List<Integer> list = new ArrayList();
-		String sql = "SELECT order_id FROM " + TableName.STUDENT_APPLY_INFO
-				+ "WHERE student_id = " + studentId;
+	public static List<OrderInfo> queryCollectedOrderByStudent(String sql){
+		List<OrderInfo> orderList = new ArrayList();
 		Connection conn = getConn(null,null,null);
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-
+			ResultSetMetaData md = rs.getMetaData();
+			int size = md.getColumnCount();
 			while(rs.next()) {
 				
-				list.add(rs.getInt("order_id"));
+				OrderInfo one = new OrderInfo(rs.getInt("id"),
+						rs.getInt("merchant_id"),
+						rs.getString("title"),
+						rs.getString("content"),
+						rs.getString("location"),
+						rs.getString("post_code"),
+						rs.getString("work_period"),
+						rs.getString("publish_time"),
+						rs.getDouble("salary"),
+						rs.getString("type"),
+						rs.getInt("staff_number"),
+						rs.getString("deadline"),
+						rs.getString("status"));
+				
+				
+				orderList.add(one);
 				
 			}
 			
@@ -182,7 +137,39 @@ public class ApplyOrderDao {
 		
 		closeConn(rs,ps,conn);
 		
-		return list;
+		return orderList;
 	}
+	
+	public static List<CollectOrderInfo> queryOrderByStudent(String sql){
+		List<CollectOrderInfo> orderList = new ArrayList();
+		Connection conn = getConn(null,null,null);
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			ResultSetMetaData md = rs.getMetaData();
+			int size = md.getColumnCount();
+			while(rs.next()) {
+				
+				CollectOrderInfo one = new CollectOrderInfo(rs.getInt("id"),
+						rs.getInt("student_id"),
+						rs.getInt("order_id"));
+				
+				
+				orderList.add(one);
+				
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		closeConn(rs,ps,conn);
+		
+		return orderList;
+	}
+	
 
 }

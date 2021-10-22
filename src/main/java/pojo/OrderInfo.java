@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.*;
+
 public class OrderInfo {
 	public int orderId;
 	public int merchantId;
@@ -14,6 +16,7 @@ public class OrderInfo {
 	public int staffNumber;
 	public String deadline;
 	public String status;
+	public List<Userinfo> applyInfo;
 	
 	public OrderInfo(int id, int merchantId,String title,String content,String location,
 			String postCode,String workPeriod,String publishTime,Double salary,String type,
