@@ -6,6 +6,8 @@ public class StudentApplyInfo {
 	int orderId;
 	String status;
 	String remark;
+	public Userinfo studentInfo;
+	public OrderInfo orderInfo;
 	
 	public StudentApplyInfo(int id,int studentId,int orderId,String status,String remark){
 		this.id = id;
