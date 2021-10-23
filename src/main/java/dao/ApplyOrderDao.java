@@ -20,7 +20,7 @@ public class ApplyOrderDao {
 	private static Connection getConn(String dbName,String myUser,String myPassword) {
 		Connection conn = null;
 		try {
-			Class.forName(Constants.dbDriver);
+//			Class.forName(Constants.dbDriver);
 			String myUrl = Constants.dbUrl;
 			if(dbName != null) {
 				myUrl = myUrl.replace("parttime_system", dbName);
@@ -97,10 +97,10 @@ public class ApplyOrderDao {
 						rs.getString("gender"),
 						rs.getInt("age"),
 						rs.getString("nationality"),
-						rs.getInt("yearOfStudy"),
-						rs.getString("finNo"),
+						rs.getInt("year_of_study"),
+						rs.getString("fin_no"),
 						rs.getString("email"),
-						rs.getString("phoneNumber"),
+						rs.getString("phone_number"),
 						rs.getString("degree"),
 						rs.getString("remark"),
 						rs.getString("program"),
@@ -161,7 +161,7 @@ public class ApplyOrderDao {
 	public static List<Integer> getStudentOrderId(int studentId){
 		List<Integer> list = new ArrayList();
 		String sql = "SELECT order_id FROM " + TableName.STUDENT_APPLY_INFO
-				+ "WHERE student_id = " + studentId;
+				+ " WHERE student_id = " + studentId;
 		Connection conn = getConn(null,null,null);
 		PreparedStatement ps = null;
 		ResultSet rs = null;

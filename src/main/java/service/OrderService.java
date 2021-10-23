@@ -22,18 +22,18 @@ public class OrderService {
 		List<OrderInfo> orders = new ArrayList();
 		StringBuilder sqlBuilder = new StringBuilder();
 		sqlBuilder.append("SELECT * FROM ").append(TableName.ORDER_INFO)
-		  .append("WHERE salary >=").append(leastSalary);
+		  .append(" WHERE salary > ").append(leastSalary);
 		
 		if(mostSalary != 0) {
-			sqlBuilder.append("AND salary <=").append(mostSalary);
+			sqlBuilder.append(" AND salary <=").append(mostSalary);
 		}
 		if(search != null && !"".equals(search)) {
-			sqlBuilder.append("AND ( title like %")
-			  .append(search).append("%")
-			  .append("OR content like %")
-			  .append(search).append("%")
-			  .append("OR location like %")
-			  .append(search).append("% )");
+			sqlBuilder.append(" AND ( title like '%")
+			  .append(search).append("%'")
+			  .append(" OR content like '%")
+			  .append(search).append("%'")
+			  .append(" OR location like '%")
+			  .append(search).append("%' )");
 		}
 		
 		orders = OrderInfoDao.queryOrderInfo(sqlBuilder.toString());
@@ -49,7 +49,7 @@ public class OrderService {
 	public static OrderInfo getOrderDetail(int id) {
 		List<OrderInfo> orders = new ArrayList();
 		String sql = "SELECT * FROM " + TableName.ORDER_INFO
-				+ "WHERE id = " + id;
+				+ " WHERE id = " + id;
 		
 		orders = OrderInfoDao.queryOrderInfo(sql);
 		
@@ -70,73 +70,68 @@ public class OrderService {
 	public static String applyOrder(int studentId,int orderId,String remark) {
 		
 		List<Integer> oldOrders = ApplyOrderDao.getStudentOrderId(studentId);
+		System.out.println(oldOrders);
 		if(oldOrders.contains(orderId)) {
-			return "订单已申请过，请勿重复申请";
+			return "You have already applied this order!";
 		}
 		
 		StringBuilder sqlBuilder = new StringBuilder();
 		sqlBuilder.append("INSERT INTO ")
 		  .append(TableName.STUDENT_APPLY_INFO)
-		  .append("( student_id, order_id,remark) VALUES (")
+		  .append("( student_id, order_id,remark,status) VALUES (")
 		  .append(studentId)
 		  .append(",")
 		  .append(orderId)
 		  .append(",")
 		  .append(remark)
+		  .append(",'processing'")
 		  .append(")");
 		
 		boolean res = ApplyOrderDao.updateOrder(sqlBuilder.toString());
 		if(res) {
-			return "success";
+			return "apply success";
 		}
-		return "申请失败";
+		return "apply fail";
 	}
 	
 	public static String publishOrder(int merchantId,OrderInfo info) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO ")
 		  .append(TableName.ORDER_INFO)
-		  .append(" ( merchant_id,title, content, location, post_code, work_period, publish_time, salary, type,"
+		  .append(" ( merchant_id,title, content, location, post_code, work_period,  salary, type,"
 		  		+ " staff_number, deadline, status ) VALUES (")
-		  .append(merchantId)
-		  .append(", ")
-		  .append(info.title)
-		  .append(",")
-		  .append(info.content)
-		  .append(",")
-		  .append(info.location)
-		  .append(",")
-		  .append(info.postCode)
-		  .append(",")
-		  .append(info.workPeriod)
-		  .append(",")
-		  .append(info.publishTime)
-		  .append(",")
-		  .append(info.salary)
-		  .append(",")
-		  .append(info.type)
-		  .append(",")
-		  .append(info.staffNumber)
-		  .append(",")
-		  .append(info.deadline)
-		  .append(",")
-		  .append(info.status)
-		  .append(")");
+		  .append(" ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ?")
+		  .append(", ? )");
 		
-		boolean res = OrderInfoDao.updateOrder(sql.toString());
+		boolean res = OrderInfoDao.creaateOrder(sql.toString(),info);
 		
 		if(res) {
-			return "success";
+			return "publish success!";
 		}else {
-			return "发布订单失败";
+			return "publish fail!";
 		}
 		
 	}
 	
+	/**
+	 * 收藏订单或者取消收藏订单
+	 * @param studentId
+	 * @param orderId
+	 * @return
+	 */
 	public static String collectOrder(int studentId,int orderId) {
-		String str = "收藏订单";
+		String str = "collecting order";
 		String query = "SELECT * FROM " + TableName.COLLECT_ORDER_INFO
-				+ "WHERE student_id = " + studentId;
+				+ " WHERE student_id = " + studentId;
 		
 		List<CollectOrderInfo> list = CollectOrderDao.queryOrderByStudent(query);
 		String sql = "INSERT INTO " +TableName.COLLECT_ORDER_INFO
@@ -146,18 +141,18 @@ public class OrderService {
 		for(CollectOrderInfo one:list) {
 			if(one.orderId == orderId) {
 				sql = "DELETE FROM " + TableName.COLLECT_ORDER_INFO
-						+"WHERE student_id = " + studentId
-						+"AND order_id = " + orderId;
-				str = "取消收藏订单";
+						+" WHERE student_id = " + studentId
+						+" AND order_id = " + orderId;
+				str = "cancel collecting order";
 				break;
 			}
 		}
 		boolean res = CollectOrderDao.updateOrder(sql);
 		
 		if(res) {
-			return str+"成功";
+			return str+" success";
 		}else {
-			return str+"失败";
+			return str+" fail";
 		}
 	}
 
@@ -170,16 +165,16 @@ public class OrderService {
 	 * @return
 	 */
 	public static List<OrderInfo> getOrderByCondition(int merchantId,String status,String type,String search){
-		String sql = "SELECT * FROM " + TableName.ORDER_INFO + "WHERE merchant_id ="
+		String sql = "SELECT * FROM " + TableName.ORDER_INFO + " WHERE merchant_id ="
 				+ merchantId;
 		if(status != null && !"".equals(status)) {
-			sql = sql + "AND status = " + status;
+			sql = sql + " AND status = " + status;
 		}
 		if(type != null && !"".equals(type)) {
-			sql = sql + "AND type = " + type;
+			sql = sql + " AND type = " + type;
 		}
 		if(search != null && !"".equals(search)) {
-			sql = sql + "AND (title like %" + search +"% OR content like %" + search+"%)";
+			sql = sql + " AND (title like '%" + search +"%' OR content like '%" + search+"%' )";
 		}
 		
 		List<OrderInfo> orders = OrderInfoDao.queryOrderInfo(sql);
@@ -197,7 +192,7 @@ public class OrderService {
 	 */
 	public static List<StudentApplyInfo> getApplyStudentByMerchant(int merchantId,String status){
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT a.*,b.* c.* FROM ")
+		sql.append("SELECT a.*,b.* ,c.* FROM ")
 		  .append(TableName.USER_INFO)
 		  .append(" as a ,  ")
 		  .append(TableName.STUDENT_APPLY_INFO)
@@ -218,13 +213,20 @@ public class OrderService {
 		return users;
 	}
 	
+	/**
+	 * 商家拒绝或者同意学生的订单申请
+	 * @param studentId
+	 * @param orderId
+	 * @param status
+	 * @return
+	 */
 	public static String updateApplication(int studentId,int orderId,String status) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE ")
 		  .append(TableName.STUDENT_APPLY_INFO)
-		  .append(" SET status = ")
+		  .append(" SET status = '")
 		  .append(status)
-		  .append(" WHERE student_id = ")
+		  .append("' WHERE student_id = ")
 		  .append(studentId)
 		  .append(" AND order_id = ")
 		  .append(orderId);
@@ -232,9 +234,9 @@ public class OrderService {
 		boolean res = ApplyOrderDao.updateOrder(sql.toString());
 		
 		if(res) {
-			return "success";
+			return "update success";
 		}else {
-			return "更新状态失败";
+			return "update fail";
 		}
 	}
 

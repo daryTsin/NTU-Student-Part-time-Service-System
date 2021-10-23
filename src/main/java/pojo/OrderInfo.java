@@ -36,5 +36,13 @@ public class OrderInfo {
 		this.status = status;
 		
 	}
+	
+	public String toString() {
+		return "{'orderId':" + orderId + ",'merchantId':" + merchantId +
+				",'title':'" + title +"','content':'" + content +"','location':'"+location+"','postCode':'"+
+				postCode +"','workPeriod':'"+workPeriod+"','publishTime':'"+publishTime+
+				"','salary':"+salary + ",'type':'"+type+"','staffNumber':"+staffNumber +
+				",'deadline':'"+deadline+"','status':'"+status+"'}";
+	}
 
 }

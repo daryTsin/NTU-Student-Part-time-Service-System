@@ -17,8 +17,8 @@ public class LoginService {
 	 * @return
 	 */
 	public static Userinfo login(String account,String password) {
-		String sql = "SELECT * FROM " + TableName.USER_INFO + "WHERE account = "+account
-				+"AND password = " + password;
+		String sql = "SELECT * FROM " + TableName.USER_INFO + " WHERE account = "+account
+				+" AND password = " + password;
 		
 		List<Userinfo> list = UserinfoDao.queryAccoutInfo(sql);
 		
@@ -39,40 +39,26 @@ public class LoginService {
 		StringBuilder sqlBuilder = new StringBuilder();
 		sqlBuilder.append("UPDATE ")
 		  .append(TableName.USER_INFO)
-		  .append("SET account = ")
-		  .append(info.account)
-		  .append(", password = ")
-		  .append(info.password)
-		  .append(", name = ")
-		  .append(info.name)
-		  .append(", matriculation_no = ")
-		  .append(info.matriculationNo)
-		  .append(", gendedr = ")
-		  .append(info.gender)
-		  .append(", age = ")
-		  .append(info.age)
-		  .append(", nationality = ")
-		  .append(info.nationality)
-		  .append(", year_of_study = ")
-		  .append(info.yearOfStudy)
-		  .append(", fin_no = ")
-		  .append(info.finNo)
-		  .append(", email = ")
-		  .append(info.email)
-		  .append(", phone_number = ")
-		  .append(info.phoneNumber)
-		  .append(", degree = ")
-		  .append(info.degree)
-		  .append(", remark = ")
-		  .append(info.remark)
-		  .append(", program = ")
-		  .append(info.program)
-		  .append(", experience =")
-		  .append(info.experience)
-		  .append("WHERE id =")
+		  .append(" SET account = ?")
+		  .append(", password = ?")
+		  .append(", name = ?")
+		  .append(", matriculation_no = ?")
+		  .append(", gender = ?")
+		  .append(", age = ?")
+		  .append(", nationality = ?")
+		  .append(", year_of_study = ?")
+		  .append(", fin_no = ?")
+		  .append(", email = ?")
+		  .append(", phone_number = ?")
+		  .append(", degree = ?")
+		  .append(", remark = ?")
+		  .append(", program = ?")
+		  .append(", experience = ?")
+		  .append(" WHERE id = ")
 		  .append(id);
 		
-		 return UserinfoDao.updateUser(sqlBuilder.toString());
+		 System.out.println(sqlBuilder.toString());
+		 return UserinfoDao.updateUser(sqlBuilder.toString(),info);
 	}
 
 }
