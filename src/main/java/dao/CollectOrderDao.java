@@ -21,7 +21,7 @@ public class CollectOrderDao {
 	private static Connection getConn(String dbName,String myUser,String myPassword) {
 		Connection conn = null;
 		try {
-			Class.forName(Constants.dbDriver);
+//			Class.forName(Constants.dbDriver);
 			String myUrl = Constants.dbUrl;
 			if(dbName != null) {
 				myUrl = myUrl.replace("parttime_system", dbName);

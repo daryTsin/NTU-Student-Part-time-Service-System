@@ -16,5 +16,12 @@ public class StudentApplyInfo {
 		this.status = status;
 		this.remark = remark;
 	}
+	
+	public String toString() {
+		return "{ 'id':"+id+", 'studentId':" +studentId+",'orderId':"+
+	        orderId+",'status':'"+status+"','remark':'"+remark+
+	        "','studentInfo':'"+studentInfo+"','orderInfo':'"+orderInfo+
+	        "'}";
+	}
 
 }

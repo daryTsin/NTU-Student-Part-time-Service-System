@@ -1,6 +1,7 @@
 package dao;
 import java.sql.*;
 import java.util.*;
+import config.*;
 
 import pojo.*;
 
@@ -18,7 +19,7 @@ public class UserinfoDao {
 	private static Connection getConn(String dbName,String myUser,String myPassword) {
 		Connection conn = null;
 		try {
-			Class.forName(dbDriver);
+//			Class.forName(dbDriver);
 			String myUrl = dbUrl;
 			if(dbName != null) {
 				myUrl = myUrl.replace("parttime_system", dbName);
@@ -97,7 +98,7 @@ public class UserinfoDao {
 	
 	public static List<Userinfo> queryAccoutInfo(String sql){
 		List<Userinfo> userList = new ArrayList();
-		Connection conn = getConn(null,null,null);
+		Connection conn = getConn(null,Constants.username,Constants.password);
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -116,10 +117,10 @@ public class UserinfoDao {
 						rs.getString("gender"),
 						rs.getInt("age"),
 						rs.getString("nationality"),
-						rs.getInt("yearOfStudy"),
-						rs.getString("finNo"),
+						rs.getInt("year_of_study"),
+						rs.getString("fin_no"),
 						rs.getString("email"),
-						rs.getString("phoneNumber"),
+						rs.getString("phone_number"),
 						rs.getString("degree"),
 						rs.getString("remark"),
 						rs.getString("program"),
@@ -139,13 +140,31 @@ public class UserinfoDao {
 		return userList;
 	}
 	
-	public static boolean updateUser(String sql) {
+	public static boolean updateUser(String sql,Userinfo info) {
 		boolean res = true;
 		Connection conn = getConn(null,null,null);
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
+			if(sql.contains("?")) {
+				ps.setString(1, info.account);
+				ps.setString(2, info.password);
+				ps.setString(3, info.name);
+				ps.setString(4, info.matriculationNo);
+				ps.setString(5, info.gender);
+				ps.setInt(6,info.age);
+				ps.setString(7, info.nationality);
+				ps.setInt(8, info.yearOfStudy);
+				ps.setString(9, info.finNo);
+				ps.setString(10, info.email);
+				ps.setString(11, info.phoneNumber);
+				ps.setString(12, info.degree);
+				ps.setString(13, info.remark);
+				ps.setString(14, info.program);
+				ps.setString(15, info.experience);
+				
+			}
 			ps.executeUpdate();
 			
 			

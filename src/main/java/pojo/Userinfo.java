@@ -61,5 +61,15 @@ public class Userinfo {
 	public Userinfo() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String toString() {
+		return "{'id':" + id + ",'account':'" + account +
+				"','password':'" + password +"','type':'" + type +"','name':'"+name+"','matriculationNo':'"+
+				matriculationNo +"','gender':'"+gender+"','age':"+age+
+				",'nationality':'"+nationality + "','yearOfStudy':"+yearOfStudy+",'finNo':'"+finNo +
+				"','email':'"+email+"','phoneNumber':'"+phoneNumber+"','degree':'"+degree+"','remark':'"+remark+
+				"','program':'"+program+"','experience':'"+experience
+						+ "'}";
+	}
 
 }
