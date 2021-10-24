@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 11/10/2021 11:12:15
+ Date: 24/10/2021 17:23:59
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,11 @@ CREATE TABLE `collect_order_info`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `student_id` int NOT NULL,
   `order_id` int NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_order`(`order_id`) USING BTREE,
+  INDEX `fk_student`(`student_id`) USING BTREE,
+  CONSTRAINT `fk_order` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_student` FOREIGN KEY (`student_id`) REFERENCES `user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
