@@ -62,6 +62,10 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("result", "login fail");
 		}else {
 			request.setAttribute("result", "login success");
+			session.setAttribute("userid", user.id);
+			session.setAttribute("usertype", user.type);
+			request.getRequestDispatcher("/GetOrders").forward(request, response);
+			
 		}
 		
 	}

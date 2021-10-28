@@ -1,0 +1,118 @@
+/* .content */
+
+.content {
+    padding: 30px 0 50px 0;
+}
+
+
+
+
+
+/* .content - subtitle */
+.content .subtitle {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+
+
+
+
+
+/* .content - detail */
+.content .detail {
+    width: 100%;
+}
+.content .detail .left {
+    float: left;
+    width: 300px;
+    height: 300px;
+}
+.content .detail .left img {
+    width: 200px;
+    height: 200px;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.content .detail .right {
+    float: left;
+    width: 900px;
+}
+.content .detail .right h2 {
+    margin-top: 25px;
+    color: rgb(79, 113, 190);
+}
+.content .detail .right .l1 {
+    background-color: #fff;
+    margin-top: 30px;
+}
+.content .detail .right .l1 li {
+    box-sizing: border-box;
+    float: left;
+    width: 320px;
+    height: 50px;
+    padding-right: 15px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color: rgb(97, 97, 97);
+}
+.content .detail .right .l1 .t1 {
+    width: 80px;
+    padding-right: 0;
+    font-weight: bold;
+    color: #000;
+}
+.content .detail .right .l1 .t2 {
+    width: 180px;
+    padding-right: 0;
+    font-weight: bold;
+    color: #000;
+}
+.content .detail .right span {
+    margin-top: 5px;
+    display: block;
+    font-weight: bold;
+}
+.content .detail .right p {
+    margin-top: 20px;
+    padding: 0 30px;
+    color: rgb(97, 97, 97);
+}
+
+
+
+
+
+/* .content - operation */
+.content .operation {
+    height: 100px;
+    width: 400px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 80px;
+}
+.content .operation form {
+    float: left;
+}
+.content .operation input {
+    box-sizing: border-box;
+    width: 100px;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+.content .operation .apply {
+    background-color: rgb(90, 158, 221);
+    border:2px solid rgb(68, 114, 196);
+    margin-right: 180px;
+}
+.content .operation .favorite {
+    background-color: rgb(253, 212, 95);
+    border:2px solid rgb(224, 159, 0);
+}

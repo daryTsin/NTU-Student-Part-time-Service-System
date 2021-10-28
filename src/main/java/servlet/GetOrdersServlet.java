@@ -36,19 +36,21 @@ public class GetOrdersServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
         
 		String search = (String) request.getParameter("search");
-		Double leastSalary = Double.valueOf(request.getParameter("leastSalary")) ;
-		Double mostSalary = Double.valueOf(request.getParameter("mostSalary")) ;
-		if(leastSalary == null) {
-			leastSalary = 0.0;
+		String s1 = request.getParameter("leastSalary");
+		String s2 =request.getParameter("mostSalary");
+		Double leastSalary = 0.0 ;
+		Double mostSalary = 0.0 ;
+		if(s1 != null) {
+			leastSalary = Double.valueOf(s1);
 		}
-		if(mostSalary == null) {
-			mostSalary = 0.0;
+		if(s2 != null) {
+			mostSalary = Double.valueOf(s2);
 		}
 		
 		List<OrderInfo> orders = OrderService.getOrderList(search, leastSalary, mostSalary);
 		
 		request.setAttribute("orders", orders);
-		
+		request.getRequestDispatcher("home.jsp").forward(request, response);
 		
 		
 	}
