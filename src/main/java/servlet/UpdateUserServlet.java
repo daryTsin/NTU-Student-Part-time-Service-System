@@ -38,21 +38,21 @@ public class UpdateUserServlet extends HttpServlet {
         	request.setAttribute("result", "用户信息修改失败,用户id未传");
         	return;
         }
-		String account = (String) request.getAttribute("account");
-		String password = (String) request.getAttribute("password");
-		String name = (String) request.getAttribute("name");
-		String matriculationNo = (String) request.getAttribute("matriculationNo");
-		String gender = (String) request.getAttribute("gender");
-		Integer age = (Integer) request.getAttribute("age");
-		String nationality = (String) request.getAttribute("nationality");
-		Integer yearOfStudy = (Integer) request.getAttribute("yearOfStudy");
-		String finNo = (String) request.getAttribute("finNo");
-		String email = (String) request.getAttribute("email");
-		String phoneNumber = (String) request.getAttribute("phoneNumber");
-		String degree = (String) request.getAttribute("degree");
-		String remark = (String) request.getAttribute("remark");
-		String program = (String) request.getAttribute("program");
-		String experience = (String) request.getAttribute("experience");
+		String account =  request.getParameter("account");
+		String password =  request.getParameter("password");
+		String name = request.getParameter("name");
+		String matriculationNo = request.getParameter("matriculationNo");
+		String gender =  request.getParameter("gender");
+		Integer age = Integer.parseInt( request.getParameter("age"));
+		String nationality = request.getParameter("nationality");
+		Integer yearOfStudy = Integer.parseInt( request.getParameter("yearOfStudy"));
+		String finNo = request.getParameter("finNo");
+		String email = request.getParameter("email");
+		String phoneNumber = request.getParameter("phoneNumber");
+		String degree = request.getParameter("degree");
+		String remark = request.getParameter("remark");
+		String program = request.getParameter("program");
+		String experience = request.getParameter("experience");
 		
 		if(age ==null) {
 			age = 0;

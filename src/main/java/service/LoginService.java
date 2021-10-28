@@ -17,8 +17,8 @@ public class LoginService {
 	 * @return
 	 */
 	public static Userinfo login(String account,String password) {
-		String sql = "SELECT * FROM " + TableName.USER_INFO + " WHERE account = "+account
-				+" AND password = " + password;
+		String sql = "SELECT * FROM " + TableName.USER_INFO + " WHERE account = '"+account
+				+"' AND password = '" + password +"'";
 		
 		List<Userinfo> list = UserinfoDao.queryAccoutInfo(sql);
 		

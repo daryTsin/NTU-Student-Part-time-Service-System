@@ -33,9 +33,9 @@ public class OrderApplyServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
         
-		Integer orderId = (Integer) request.getAttribute("orderId");
-		Integer studentId = (Integer) request.getAttribute("studentId");
-		String remark = (String) request.getAttribute("remark");
+		Integer orderId = Integer.parseInt( request.getParameter("orderId"));
+		Integer studentId = Integer.parseInt( request.getParameter("studentId"));
+		String remark =  request.getParameter("remark");
 		if(orderId == null) {
 			orderId = 0;
 		}

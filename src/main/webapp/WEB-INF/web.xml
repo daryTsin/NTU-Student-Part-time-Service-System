@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+
+
+  <display-name>parttime-system</display-name>
+  
+ 
+  
+  <filter>
+    <filter-name>OrderFilter</filter-name>
+    <filter-class>filters.OrderFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>HitCounterFilter</filter-name>
+    <filter-class>filters.HitCounterFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>OrderFilter</filter-name>
+    <servlet-name>ReceiptServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>HitCounterFilter</filter-name>
+    <servlet-name>BookStoreServlet</servlet-name>
+  </filter-mapping>
+  
+  <servlet>
+    <display-name>ApplicationHandle</display-name>
+    <servlet-name>ApplicationHandleServlet</servlet-name>
+    <servlet-class>servlet.ApplicationHandleServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>GetOrdersServlet</display-name>
+    <servlet-name>GetOrdersServlet</servlet-name>
+    <servlet-class>servlet.GetOrdersServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>OldOrderServlet</display-name>
+    <servlet-name>OldOrderServlet</servlet-name>
+    <servlet-class>servlet.OldOrderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>OrderApplyServlet</display-name>
+    <servlet-name>OrderApplyServlet</servlet-name>
+    <servlet-class>servlet.OrderApplyServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>OrderCollectServlet</display-name>
+    <servlet-name>OrderCollectServlet</servlet-name>
+    <servlet-class>servlet.OrderCollectServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <display-name>OrderDetailServlet</display-name>
+    <servlet-name>OrderDetailServlet</servlet-name>
+    <servlet-class>servlet.OrderDetailServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>PublishOrderServlet</display-name>
+  	<servlet-name>PublishOrderServlet</servlet-name>
+  	<servlet-class>servlet.PublishOrderServlet</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>ApplicationHandleServlet</servlet-name>
+    <url-pattern>/ApplicationHandle</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetOrdersServlet</servlet-name>
+    <url-pattern>/GetOrders</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OldOrderServlet</servlet-name>
+    <url-pattern>/OldOrders</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderApplyServlet</servlet-name>
+    <url-pattern>/OrderApply</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderCollectServlet</servlet-name>
+    <url-pattern>/OrderCollect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OrderDetailServlet</servlet-name>
+    <url-pattern>/OrderDetail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PublishOrderServlet</servlet-name>
+  	<url-pattern>/PublishOrder</url-pattern>
+  </servlet-mapping>
+ 
+
+  <error-page>
+    <exception-type>exception.BookNotFoundException</exception-type>
+    <location>/errorpage.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>javax.servlet.UnavailableException</exception-type>
+    <location>/errorpage.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>exception.BooksNotFoundException</exception-type>
+    <location>/errorpage.html</location>
+  </error-page>
+  
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>StudentApplyInfoServlet</servlet-name>
+  	<servlet-class>servlet.StudentApplyInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>StudentApplyInfoServlet</servlet-name>
+  	<url-pattern>/StudentApplyInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>UpdateUserServlet</servlet-name>
+  	<servlet-class>servlet.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UpdateUserServlet</servlet-name>
+  	<url-pattern>/UpdateUser</url-pattern>
+  </servlet-mapping>
+  <jsp-config></jsp-config>
+</web-app>
