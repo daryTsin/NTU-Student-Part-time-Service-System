@@ -91,7 +91,7 @@ public class ApplyOrderDao {
 				Userinfo student = new Userinfo(rs.getInt("id"),
 						rs.getString("account"),
 						rs.getString("password"),
-						rs.getString("type"),
+						"student",
 						rs.getString("name"),
 						rs.getString("matriculation_no"),
 						rs.getString("gender"),

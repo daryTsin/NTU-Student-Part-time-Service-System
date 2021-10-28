@@ -35,17 +35,17 @@ public class OldOrderServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
         
-		Integer merchantId = (Integer) request.getAttribute("merchantId");
-		String status = (String) request.getAttribute("status");
-		String type = (String) request.getAttribute("type");
-		String search = (String) request.getAttribute("search");
+		Integer merchantId = Integer.parseInt(request.getParameter("merchantId")) ;
+		String status =  request.getParameter("status");
+		String type =  request.getParameter("type");
+		String search =  request.getParameter("search");
 		
 		if(merchantId == null) {
 			merchantId = 0;
 		}
 		
 		List<OrderInfo> orders = OrderService.getOrderByCondition(merchantId, status, type, search);
-		out.print(orders);
+
 		request.setAttribute("orders", orders);
 
 	}

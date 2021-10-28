@@ -35,9 +35,9 @@ public class GetOrdersServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
         
-		String search = (String) request.getAttribute("search");
-		Double leastSalary = (Double) request.getAttribute("leastSalary");
-		Double mostSalary = (Double) request.getAttribute("mostSalary");
+		String search = (String) request.getParameter("search");
+		Double leastSalary = Double.valueOf(request.getParameter("leastSalary")) ;
+		Double mostSalary = Double.valueOf(request.getParameter("mostSalary")) ;
 		if(leastSalary == null) {
 			leastSalary = 0.0;
 		}
