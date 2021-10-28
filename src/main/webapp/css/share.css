@@ -1,0 +1,35 @@
+/* .share */
+
+.share {
+    position: fixed;
+    top: 300px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.share .slidebar {
+    background-color: rgb(68, 114, 196);
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 160px;
+    height: 60px;
+    line-height: 60px;
+    cursor: pointer;
+}
+.share .slidebar i {
+    float: left;
+    margin-left: 15px;
+    font-style: normal;
+    font-family: 'icomoon';
+    font-size: 36px;
+    color:#fff;
+}
+.share .slidebar span {
+    margin-left: 20px;
+    float: left;
+    font-size: 26px;
+    color: #fff;
+}

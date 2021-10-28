@@ -1,0 +1,237 @@
+/* .content */
+
+.content {
+    margin-top: 30px;
+}
+
+
+
+
+
+/* content - filter */
+.content .filter {
+    float: left;
+    width: 200px;
+    height: 100%;
+}
+.content .filter ul {
+    box-sizing: border-box;
+}
+.content .filter ul li {
+    height: 60px;
+    box-sizing: border-box;
+    border: 1px solid rgb(68, 114, 196);
+    margin-bottom: -1px;
+}
+.content .filter ul .first {
+    text-align: center;
+    line-height: 60px;
+    background-color:rgb(68, 114, 196);
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 22px;
+}
+.content .filter ul li a {
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    line-height: 60px;
+    color:rgb(68, 114, 196);
+    font-weight: bold;
+}
+.content .filter ul li a:hover {
+    background-color: rgb(68, 114, 196);
+    color:#fff;
+}
+
+
+
+
+
+/* content - result */
+.content .result {
+    float: left;
+    width: 1000px;
+    height: 100%;
+}
+
+
+
+
+
+/* content - result - search */
+.content .result .search {
+    height: 80px;
+    border-bottom: 1px solid #eee;
+    margin-left: 20px;
+}
+.content .result .search input[type="text"] {
+    float: left;
+    width: 500px;
+    height: 40px;
+    margin-left: 240px;
+    margin-top: 20px;
+    padding-left: 15px;
+    border-radius: 10px;
+    border: 1px solid rgb(97, 97, 97);
+    outline: none;
+    font-size: 16px;
+    color: rgb(97, 97, 97);
+    
+}
+.content .result .search input[type="submit"] {
+    float: left;
+    margin-left: 14px;
+    margin-top: 28px;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    font-family: 'icomoon';
+    font-size: 24px;
+    color:rgb(97, 97, 97);
+}
+
+
+
+
+
+/* content - result - subtitle */
+.content .result .subtitle {
+    box-sizing: border-box;
+    height: 30px;
+    padding-left: 40px;
+    padding-top: 5px;
+    color: rgb(68, 114, 196);
+}
+
+
+
+
+
+/* content - result - joblist */
+.content .result .joblist .onelist {
+    height: 200px;
+    margin-left: 20px;
+    border-bottom: 1px solid #eee;
+}
+.content .result .joblist img {
+    float: left;
+    width: 140px;
+    height: 140px;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+.content .result .joblist .txt {
+    float: left;
+    margin-left: 25px;
+    margin-top: 30px;
+    padding-top: 5px;
+    width: 750px;
+    height: 140px;
+}
+.content .result .joblist .txt a {
+    font-size: 18px;
+    font-weight: bold;
+}
+.content .result .joblist .txt a:hover {
+    color:rgb(97, 97, 97);
+}
+.content .result .joblist .txt ul {
+    width: 100%;
+    height: 100px;
+    margin-top: 5px;
+}
+.content .result .joblist .txt ul li {
+    float: left;
+    width: 280px;
+    height: 33.33px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-size: 15px;
+    color: rgb(97, 97, 97);
+}
+.content .result .joblist .txt ul .t1 {
+    width: 110px;
+    color:#000;
+}
+.content .result .joblist .txt ul .t2 {
+    width: 80px;
+    color:#000;
+}
+
+
+/* content - result - joblist - onlist-ver2 */
+.content .result .joblist .onelist-ver2 {
+    height: 230px;
+    margin-left: 20px;
+    border-bottom: 1px solid #eee;
+}
+.content .result .joblist .onelist-ver2 .detail {
+    float: left;
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 40px;
+    color: rgb(68, 114, 196);
+}
+.content .result .joblist .onelist-ver2 .detail i {
+    font-style: normal;
+    font-weight: bold;
+    margin-left: 60px;
+}
+.content .result .joblist .onelist-ver2 .detail span {
+    color:rgb(97, 97, 97);
+}
+.content .result .joblist .onelist-ver2 .detail input {
+    padding: 3px 5px;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid rgb(68, 114, 196);
+    border-radius: 6px;
+    box-shadow: 1px 1px 1px rgb(68, 114, 196);
+    color:rgb(97, 97, 97);
+}
+.content .result .joblist .onelist-ver2 .detail input:hover {
+    color:rgb(68, 114, 196);
+}
+
+
+
+
+
+/* content - result - page */
+.content .result .page {
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+.content .result .page .detail {
+    width: 600px;
+    height: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+.content .result .page .detail a {
+    display: block;
+    float: left;
+    padding: 2px;
+    margin: 0px 25px;
+}
+.content .result .page .detail a:hover {
+    color: rgb(68, 114, 196);
+}
+.content .result .page .detail span {
+    float: left;
+    margin: 0px 35px;
+    letter-spacing: 5px;
+    font-weight: bold;
+    color: rgb(68, 114, 196);
+}
