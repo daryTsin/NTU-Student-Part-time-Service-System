@@ -33,8 +33,9 @@ public class ApplicationHandleServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
         
-		Integer studentId = (Integer) request.getAttribute("studentId");
-		Integer orderId = (Integer) request.getAttribute("orderId");
+		Integer studentId = Integer.parseInt(request.getParameter("studentId")) ;
+		Integer orderId = Integer.parseInt(request.getParameter("orderId")) ;
+		
 		String status = (String) request.getAttribute("status");
 		if(studentId == null) {
 			studentId = 0;

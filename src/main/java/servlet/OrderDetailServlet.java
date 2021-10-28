@@ -34,7 +34,7 @@ public class OrderDetailServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
         
-		Integer id = (Integer) request.getAttribute("orderId");
+		Integer id = Integer.parseInt( request.getParameter("orderId"));
 		if(id == null) {
 			id = 0;
 		}

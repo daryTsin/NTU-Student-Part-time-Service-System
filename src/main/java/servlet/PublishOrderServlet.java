@@ -34,17 +34,17 @@ public class PublishOrderServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		Integer id = (Integer) request.getAttribute("merchantId");
-		String title = (String) request.getAttribute("title");
-		String content = (String) request.getAttribute("content");
-		String location = (String) request.getAttribute("location");
-		String postCode = (String) request.getAttribute("postCode");
-		String workPeriod = (String) request.getAttribute("workPeriod");
+		Integer id = Integer.parseInt( request.getParameter("merchantId"));
+		String title =  request.getParameter("title");
+		String content =  request.getParameter("content");
+		String location = request.getParameter("location");
+		String postCode =  request.getParameter("postCode");
+		String workPeriod =  request.getParameter("workPeriod");
 
-		Double salary = (Double) request.getAttribute("salary");
-		String type = (String) request.getAttribute("type");
-		Integer staffNumber = (Integer) request.getAttribute("staffNumber");
-		String deadline = (String) request.getAttribute("deadline");
+		Double salary = Double.valueOf( request.getParameter("salary"));
+		String type =  request.getParameter("type");
+		Integer staffNumber = Integer.parseInt( request.getParameter("staffNumber"));
+		String deadline =  request.getParameter("deadline");
 		String status = "processing";
 		if(id == null) {
 			id = 0;

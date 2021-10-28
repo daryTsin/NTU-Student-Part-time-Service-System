@@ -35,8 +35,8 @@ public class StudentApplyInfoServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
         
-		Integer merchantId = (Integer) request.getAttribute("merchantId");
-		String status = (String) request.getAttribute("status");
+		Integer merchantId = Integer.parseInt( request.getParameter("merchantId"));
+		String status =  request.getParameter("status");
 		if(merchantId == null) {
 			merchantId = 2;
 		}
