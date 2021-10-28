@@ -213,6 +213,7 @@ public class OrderService {
 		return users;
 	}
 	
+	
 	/**
 	 * 商家拒绝或者同意学生的订单申请
 	 * @param studentId
@@ -239,5 +240,71 @@ public class OrderService {
 			return "update fail";
 		}
 	}
+	
+	/** Meng Ying
+	 * 查询指定学生申请商家信息
+	 * @param studentId
+	 * @param status
+	 * @param search
+	 * @return
+	 */
+	public static List<StudentApplyInfo> getApplyMerchantByStudent(int studentId,String status,String search){
+		String sql = null;
+		
+		sql = " select a.*,b.*,c.* "
+				+ " from student_apply_info  a"
+				+ " left join order_info  b"
+				+ " on a.order_id=b.id"
+				+ " left join user_info c"
+				+ " on c.id = b.merchant_id"
+				+ " where a.student_id = "+ studentId;
+		
+		if(status != null && !"".equals(status)) {
+			sql = sql + " and a.status like '%"+status+"%'";
+		}
+		if(search != null && !"".equals(search)) {
+			sql = sql + " and (b.title like '%"+search+"%' "
+		              + " or b.content like '%"+search+"%' "
+					  + " or b.location like '%"+search+"%')";
+		}
+		
+		List<StudentApplyInfo> appliedOrders = ApplyOrderDao.queryOrderInfo(sql.toString());
+		
+		return appliedOrders;
+	}
+	
+	/**
+	 * 查询指定学生抽昂订单信息
+	 * @param studentId
+	 * @param status
+	 * @param search
+	 * @return
+	 */
+	public static List<StudentApplyInfo> getColletOrder(int studentId,String status,String search){
+		String sql = null;
+		
+		sql = " select a.*,b.*,c.*"
+				+ " from collect_order_info  a"
+				+ " left join order_info  b"
+				+ " on a.order_id=b.id"
+				+ " left join user_info c"
+				+ " on c.id = b.merchant_id"
+				+ " where a.student_id = " + studentId;
+		
+		if(status != null && !"".equals(status)) {
+			sql = sql + " and a.status like '%"+status+"%'";
+		}
+		if(search != null && !"".equals(search)) {
+			sql = sql + " and (b.title like '%"+search+"%' "
+		              + " or b.content like '%"+search+"%' "
+					  + " or b.location like '%"+search+"%')";
+		}
+		
+		List<StudentApplyInfo> collectOrders = ApplyOrderDao.queryOrderInfo(sql.toString());
+		
+		return collectOrders;
+	}
+	
+	
 
 }
