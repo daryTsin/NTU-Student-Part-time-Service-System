@@ -57,7 +57,7 @@ public class LoginService {
 		  .append(" WHERE id = ")
 		  .append(id);
 		
-		 System.out.println(sqlBuilder.toString());
+		// System.out.println(sqlBuilder.toString());
 		 return UserinfoDao.updateUser(sqlBuilder.toString(),info);
 	}
 

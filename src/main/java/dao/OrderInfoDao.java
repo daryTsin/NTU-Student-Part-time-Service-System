@@ -150,11 +150,11 @@ public static Connection conn = null;
 				ps.setString(4, info.location);
 				ps.setString(5, info.postCode);
 				ps.setString(6, info.workPeriod);
-				ps.setDouble(8, info.salary);
-				ps.setString(9, info.type);
-				ps.setInt(10, info.staffNumber);
-				ps.setString(11, info.deadline);
-				ps.setString(12, info.status);
+				ps.setDouble(7, info.salary);
+				ps.setString(8, info.type);
+				ps.setInt(9, info.staffNumber);
+				ps.setString(10, info.deadline);
+				ps.setString(11, info.status);
 				
 			}
 			

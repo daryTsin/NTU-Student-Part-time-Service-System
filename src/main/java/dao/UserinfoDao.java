@@ -19,8 +19,8 @@ public class UserinfoDao {
 	private static Connection getConn(String dbName,String myUser,String myPassword) {
 		Connection conn = null;
 		try {
-//			Class.forName(dbDriver);
-			String myUrl = dbUrl;
+//			Class.forName(Constants.dbDriver);
+			String myUrl = Constants.dbUrl;
 			if(dbName != null) {
 				myUrl = myUrl.replace("parttime_system", dbName);
 			}
@@ -28,7 +28,7 @@ public class UserinfoDao {
 			if(myUser!=null) {
 				conn = DriverManager.getConnection(myUrl,myUser,myPassword);
 			}else {
-				conn = DriverManager.getConnection(myUrl,username,password);
+				conn = DriverManager.getConnection(myUrl,Constants.username,Constants.password);
 			}
 			
 		}catch(Exception e) {

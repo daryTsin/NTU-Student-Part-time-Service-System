@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import pojo.*;
 import service.LoginService;
 
@@ -32,14 +34,17 @@ public class UpdateUserServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession(); 
+		Integer id = (Integer) session.getAttribute("userid");
+		String account = (String) session.getAttribute("account");
+		String password = (String) session.getAttribute("password");
 		
-        Integer id = (Integer) request.getAttribute("id");
-        if(id==null) {
-        	request.setAttribute("result", "用户信息修改失败,用户id未传");
-        	return;
-        }
-		String account =  request.getParameter("account");
-		String password =  request.getParameter("password");
+//        Integer id = (Integer) request.getAttribute("id");
+//        if(id==null) {
+//        	request.setAttribute("result", "upadate fail,no id");
+//        	return;
+//        }
+		
 		String name = request.getParameter("name");
 		String matriculationNo = request.getParameter("matriculationNo");
 		String gender =  request.getParameter("gender");
@@ -58,7 +63,7 @@ public class UpdateUserServlet extends HttpServlet {
 			age = 0;
 		}
 		if(yearOfStudy == null) {
-			yearOfStudy = 1;
+			yearOfStudy = 0;
 		}
 
 		Userinfo user = new Userinfo( id,
@@ -78,6 +83,7 @@ public class UpdateUserServlet extends HttpServlet {
 	     remark,
 	     program,
 	     experience);
+		//out.print(user);
 
 		boolean res = LoginService.updateUserInfo(id, user);
 
@@ -86,7 +92,8 @@ public class UpdateUserServlet extends HttpServlet {
 		}else {
 			request.setAttribute("result", "update fail");
 		}
-		
+		String result = (String)request.getAttribute("result");
+		out.print(result);
 	}
 
 	/**

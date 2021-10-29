@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.*;
 import pojo.*;
@@ -33,15 +34,15 @@ public class PublishOrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession(); 
 		
-		Integer id = Integer.parseInt( request.getParameter("merchantId"));
+		Integer id = (Integer) session.getAttribute("userid");
 		String title =  request.getParameter("title");
 		String content =  request.getParameter("content");
 		String location = request.getParameter("location");
 		String postCode =  request.getParameter("postCode");
 		String workPeriod =  request.getParameter("workPeriod");
-
-		Double salary = Double.valueOf( request.getParameter("salary"));
+		Double salary = Double.valueOf( request.getParameter("salary"));		
 		String type =  request.getParameter("type");
 		Integer staffNumber = Integer.parseInt( request.getParameter("staffNumber"));
 		String deadline =  request.getParameter("deadline");
@@ -49,12 +50,7 @@ public class PublishOrderServlet extends HttpServlet {
 		if(id == null) {
 			id = 0;
 		}
-		if(salary == null) {
-			salary = 0.0;
-		}
-		if(staffNumber == null) {
-			staffNumber = 1;
-		}
+
 		
 		OrderInfo order = new OrderInfo(0,
 				id,
@@ -71,7 +67,7 @@ public class PublishOrderServlet extends HttpServlet {
 				status
 				);
 		String res = OrderService.publishOrder(id, order);
-		out.print(res);
+//		out.print(res);
 		request.setAttribute("result", res);
 		
 		
