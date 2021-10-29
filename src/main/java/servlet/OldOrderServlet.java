@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import pojo.OrderInfo;
 import service.OrderService;
@@ -34,19 +35,25 @@ public class OldOrderServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-        
-		Integer merchantId = Integer.parseInt(request.getParameter("merchantId")) ;
+		HttpSession session = request.getSession();     
+		 
+		Integer merchantId = 0;
+		if(session.getAttribute("userid") == null) {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else {
+			merchantId = (Integer) session.getAttribute("userid");
+		}
+		
+		
 		String status =  request.getParameter("status");
 		String type =  request.getParameter("type");
 		String search =  request.getParameter("search");
 		
-		if(merchantId == null) {
-			merchantId = 0;
-		}
 		
 		List<OrderInfo> orders = OrderService.getOrderByCondition(merchantId, status, type, search);
 
 		request.setAttribute("orders", orders);
+		request.getRequestDispatcher("published.jsp").forward(request, response);
 
 	}
 

@@ -33,15 +33,20 @@ public class OrderDetailServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		String orderId = request.getParameter("orderId");
+		if(orderId == null) {
+			orderId = "1";
+		}
         
-		Integer id = Integer.parseInt( request.getParameter("orderId"));
+		Integer id = Integer.parseInt(orderId );
 		if(id == null) {
-			id = 0;
+			id = 1;
 		}
 		
 		OrderInfo order = OrderService.getOrderDetail(id);
 		
 		request.setAttribute("order", order);
+		request.getRequestDispatcher("job_description.jsp").forward(request, response);
 	}
 
 	/**

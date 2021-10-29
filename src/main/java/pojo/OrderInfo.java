@@ -18,6 +18,10 @@ public class OrderInfo {
 	public String status;
 	public List<Userinfo> applyInfo;
 	
+	public OrderInfo() {
+		
+	}
+	
 	public OrderInfo(int id, int merchantId,String title,String content,String location,
 			String postCode,String workPeriod,String publishTime,Double salary,String type,
 			int staffNumber,String deadline,String status){

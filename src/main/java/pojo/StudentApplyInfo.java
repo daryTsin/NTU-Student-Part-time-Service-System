@@ -1,11 +1,11 @@
 package pojo;
 
 public class StudentApplyInfo {
-	int id;
-	int studentId;
-	int orderId;
-	String status;
-	String remark;
+	public int id;
+	public int studentId;
+	public int orderId;
+	public String status;
+	public String remark;
 	public Userinfo studentInfo;
 	public OrderInfo orderInfo;
 	

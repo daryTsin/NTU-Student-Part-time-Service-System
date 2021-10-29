@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
+<%@ page import="pojo.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,8 +32,7 @@
 
 <body>
 
-	<%@ include file="z_header_for_stu.jsp"%>
-	
+    <%@ include file="z_header_for_stu.jsp"%>	
 	
     <div class="content w">
         <div class="filter">
@@ -54,50 +55,45 @@
                 <h2>Applied Job List</h2>
             </div>
             <div class="joblist">
-                <c:forEach var="oneorder" items="${GetOrders.orders}">
-                    <div class="onelist-ver2">
-                        <a href="${job_description?orderID=${oneorder.orderID}}">
-                            <img src="images/restaurant.jfif" alt="${oneorder.title}}">
-                        </a>
-                        <div class="txt">
-                            <a href="${job_description?orderID=${oneorder.orderID}}">
-                                ${oneorder.title}
-                            </a>
-                            <ul>
-                                <li class="t1">Work Period:</li>
-                                <li>${oneorder.type}</li>
-                                <li class="t2">Type:</li>
-                                <li>${oneorder.type}</li>
-                                <li class="t1">Location:</li>
-                                <li>${oneorder.location}</li>
-                                <li class="t2">Salary:</li>
-                                <li>${oneorder.salary}</li>
-                                <li class="t1">Publish Date:</li>
-                                <li>${oneorder.publishTime}</li>
-                                <li class="t2">Deadline:</li>
-                                <li>${oneorder.deadline}</li>
-                            </ul>
-                        </div>
-                        <div class="detail">
-                            <i>Status:&nbsp</i>
-                            <span>${oneorder.status}</span>
-                        </div>
+			<% 
+			List<OrderInfo> orders = (List<OrderInfo>) request.getAttribute("orders");
+			if(orders == null){
+				orders = new ArrayList();
+			}
+			for (OrderInfo oneorder:orders){
+			%>
+				<div class="onelist-ver2">
+					<a href="">
+						<img src="images/restaurant.jfif" title="<% out.print( oneorder.title); %>">
+					</a>
+					<div class="txt">
+						<a href="">
+							<% out.print( oneorder.title); %>
+						</a>
+							<ul>
+							<li class="t1">Work Period:</li>
+							<li><% out.print( oneorder.workPeriod); %></li>
+							<li class="t2">Type:</li>
+							<li><% out.print( oneorder.type); %></li>
+							<li class="t1">Location:</li>
+							<li><% out.print( oneorder.location); %></li>
+							<li class="t2">Salary:</li>
+							<li><% out.print( oneorder.salary); %></li>
+							<li class="t1">Publish Date:</li>
+							<li><% out.print( oneorder.publishTime); %></li>
+							<li class="t2">Deadline:</li>
+							<li><% out.print( oneorder.deadline); %></li>
+						</ul>
+					</div>
+					<div class="detail">
+                        <i>Status:&nbsp</i>
+                        <span><% out.print( oneorder.status); %></span>
                     </div>
-                </c:forEach>
-            </div>
-            <div class="page">
-                <div class="detail">
-                    <a href="$xxxxx?pageIndex=0">First Page</a>
-                    <c:if test="${ pageIndex>=2 }">
-                        <a href="$xxxxx?pageIndex=${pageIndex-2}">Previous</a>&nbsp;
-                    </c:if>
-                    <span>${pageIndex}/${pageTotal}</span>
-                    <c:if test="${pageIndex<pageTotal}">
-                        <a href="$xxxxx?pageIndex=${pageIndex}">Next</a>&nbsp;
-                    </c:if>
-                    <a href="$xxxxx?pageIndex=${pageTotal-1}">Last Page</a>
-                </div>
-            </div>
+				</div>
+			<%
+			}
+			%>
+			</div>
         </div>
     </div>
     <div class="share">

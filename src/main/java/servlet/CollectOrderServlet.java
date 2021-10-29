@@ -50,7 +50,8 @@ public class CollectOrderServlet extends HttpServlet {
 		
 		List<StudentApplyInfo> collectOrders = OrderService.getColletOrder(studentId, status ,search);
 		out.print(collectOrders);
-		request.setAttribute("collectOrders", collectOrders);
+		request.setAttribute("orders", collectOrders);
+		request.getRequestDispatcher("favorite.jsp").forward(request, response);
 	}
 
 	/**
