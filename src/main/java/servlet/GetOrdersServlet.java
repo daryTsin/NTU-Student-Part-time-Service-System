@@ -37,7 +37,8 @@ public class GetOrdersServlet extends HttpServlet {
         
 		String search = (String) request.getParameter("search");
 		String s1 = request.getParameter("leastSalary");
-		String s2 =request.getParameter("mostSalary");
+		String s2 = request.getParameter("mostSalary");
+		String type = request.getParameter("type");
 		Double leastSalary = 0.0 ;
 		Double mostSalary = 0.0 ;
 		if(s1 != null) {
@@ -46,8 +47,9 @@ public class GetOrdersServlet extends HttpServlet {
 		if(s2 != null) {
 			mostSalary = Double.valueOf(s2);
 		}
-		
-		List<OrderInfo> orders = OrderService.getOrderList(search, leastSalary, mostSalary);
+		System.out.print(search);
+		System.out.print(type);
+		List<OrderInfo> orders = OrderService.getOrderList(search, leastSalary, mostSalary,type);
 		
 		request.setAttribute("orders", orders);
 		request.getRequestDispatcher("home.jsp").forward(request, response);
