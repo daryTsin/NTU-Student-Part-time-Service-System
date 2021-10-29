@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 		Userinfo user = LoginService.login(account, password);
 //		
 //	
-//		out.print(user);
+		out.print(user);
 		if(user == null) {
 			request.setAttribute("result", "login fail");
 			request.getRequestDispatcher("login.jsp").forward(request, response); 
@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userid", user.id);
 			request.setAttribute("result", "login success");
 //			request.getRequestDispatcher("PublishOrder.jsp").forward(request, response); 
-			request.getRequestDispatcher("/GetOrders").forward(request, response); 
+			request.getRequestDispatcher("UpdateUser.jsp").forward(request, response); 
 		}
 		
 	}
