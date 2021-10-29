@@ -31,7 +31,7 @@
 
 <body>
 
-    <%
+	<%
 	if (session.getAttribute("usertype") == "student") {
 	%>
     <%@ include file="z_header_for_stu.jsp"%>
@@ -48,19 +48,19 @@
         <div class="filter">
             <ul>
                 <li class="first">TYPE</li>
-                <li><a href="#">restaurant</a></li>
-                <li><a href="#">hotel</a></li>
-                <li><a href="#">school</a></li>
-                <li><a href="#">volunteer</a></li>
-                <li><a href="#">park</a></li>
+                <li><a href="#" id="onefilter">restaurant</a></li>
+                <li><a href="#" id="onefilter">hotel</a></li>
+                <li><a href="#" id="onefilter">school</a></li>
+                <li><a href="#" id="onefilter">volunteer</a></li>
+                <li><a href="#" id="onefilter">park</a></li>
             </ul>
         </div>
         <div class="result">
             <div class="search">
-                <form action="GetOrders" method="get">
-                    <input type="text" placeholder="Title / Content / Location">
-                </form>
-                <input type="submit" name="search" value="" id="search" />
+                <form action="GetOrders" method="get" id="myform">
+                    <input type="text" name="search" placeholder="Title / Content / Location" id="search">
+					<input type="submit" value="?" id="searchicon" />
+				</form>
             </div>
            
             <div class="joblist">
@@ -103,7 +103,7 @@
     </div>
     <div class="share">
         <div class="slidebar">
-            <i></i>
+            <i>?</i>
             <span>share</span>
         </div>
     </div>
@@ -121,6 +121,34 @@
         slidebar.onclick = function () {
             alert('\nLink copied successfully.\nGo and share with others!');
         };
+  
+  
+  var search = document.querySelector('#search').value;
+        // 1. 获取所有按钮元素
+  var filter = document.querySelector('.filter');
+        var btns = filter.getElementsByTagName('a');
+  var searchicon = document.querySelector('#searchicon');
+        // btns得到的是伪数组  里面的每一个元素 btns[i]
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function() {
+                // (1) 先把所有的按钮deafult
+                for (var i = 0; i < btns.length; i++) {
+                    btns[i].style.backgroundColor = '#fff';
+     btns[i].style.color='rgb(68, 114, 196)';
+                }
+                // (2) 当前的元素
+    this.style.backgroundColor = 'rgb(68, 114, 196)';
+    this.style.color='#fff';
+    var type = this.innerText;
+    request.setAttribute("type",type);
+    request.setAttribute("search",search);
+    var myform = document.getElementById('myform');
+    myform.submit();
+            }
+        }
+  
+  
+
     </script>
 </body>
 

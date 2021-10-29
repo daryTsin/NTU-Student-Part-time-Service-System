@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userid", user.id);
 			request.setAttribute("result", "login success");
 //			request.getRequestDispatcher("PublishOrder.jsp").forward(request, response); 
-			request.getRequestDispatcher("UpdateUser.jsp").forward(request, response); 
+			request.getRequestDispatcher("/GetOrders").forward(request, response); 
 		}
 		
 	}

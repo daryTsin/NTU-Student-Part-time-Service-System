@@ -18,7 +18,7 @@ public class OrderService {
 	 * @param mostSalary
 	 * @return
 	 */
-	public static List<OrderInfo> getOrderList(String search,double leastSalary,double mostSalary){
+	public static List<OrderInfo> getOrderList(String search,double leastSalary,double mostSalary,String type){
 		List<OrderInfo> orders = new ArrayList();
 		StringBuilder sqlBuilder = new StringBuilder();
 		sqlBuilder.append("SELECT * FROM ").append(TableName.ORDER_INFO)
@@ -26,6 +26,9 @@ public class OrderService {
 		
 		if(mostSalary != 0) {
 			sqlBuilder.append(" AND salary <=").append(mostSalary);
+		}
+		if(type != null) {
+			sqlBuilder.append(" AND type =").append(type);
 		}
 		if(search != null && !"".equals(search)) {
 			sqlBuilder.append(" AND ( title like '%")
