@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
 <%@ page import="java.util.*" %>
 <%@ page import="pojo.*" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,16 +32,17 @@
 <body>
 
     <%
- if (session.getAttribute("usertype") == "student") {
- %>
-  <%@ include file="z_header_for_stu.jsp"%>
- <%}
- else {
- %>
+	if (session.getAttribute("usertype") == "student") {
+	%>
+    <%@ include file="z_header_for_stu.jsp"%>
+	<%
+	}
+	else {
+	%>
      <%@ include file="z_header_for_mer.jsp"%>
- <%
- }
- %>
+	<%
+	}
+	%>
 
     <div class="content w">
         <div class="filter">
@@ -62,53 +63,42 @@
                 <input type="submit" name="search" value="" id="search" />
             </div>
            
-            
             <div class="joblist">
-<% List<OrderInfo> orders = (List<OrderInfo>) request.getAttribute("orders");
-   for (OrderInfo oneorder:orders){
-
-%>
-    <div class="onelist">
-            <a href="">
-                <img src="images/restaurant.jfif" title="<% out.print( oneorder.title); %>">
-            </a>
-            <div class="txt">
-                <a href="">
-                    <% out.print( oneorder.title); %>
-                </a>
-                <ul>
-                    <li class="t1">Work Period:</li>
-                    <li><% out.print( oneorder.workPeriod); %></li>
-                    <li class="t2">Type:</li>
-                    <li><% out.print( oneorder.type); %></li>
-                    <li class="t1">Location:</li>
-                    <li><% out.print( oneorder.location); %></li>
-                    <li class="t2">Salary:</li>
-                    <li><% out.print( oneorder.salary); %></li>
-                    <li class="t1">Publish Date:</li>
-                    <li><% out.print( oneorder.publishTime); %></li>
-                    <li class="t2">Deadline:</li>
-                    <li><% out.print( oneorder.deadline); %></li>
-                </ul>
-            </div>
-  </div>
-<%
-   }
-%>
-</div>
-            <div class="page">
-                <div class="detail clearfix">
-                    <a href="$xxxxx?pageIndex=0">First Page</a>
-                    <c:if test="${ pageIndex>=2 }">
-                        <a href="$xxxxx?pageIndex=${pageIndex-2}">Previous</a>&nbsp;
-                    </c:if>
-                    <span>${pageIndex}/${pageTotal}</span>
-                    <c:if test="${pageIndex<pageTotal}">
-                        <a href="$xxxxx?pageIndex=${pageIndex}">Next</a>&nbsp;
-                    </c:if>
-                    <a href="$xxxxx?pageIndex=${pageTotal-1}">Last Page</a>
-                </div>
-            </div>
+			<% 
+			List<OrderInfo> orders = (List<OrderInfo>) request.getAttribute("orders");
+			if(orders == null){
+				orders = new ArrayList();
+			}
+			for (OrderInfo oneorder:orders){
+			%>
+				<div class="onelist">
+					<a href="">
+						<img src="images/restaurant.jfif" title="<% out.print( oneorder.title); %>">
+					</a>
+					<div class="txt">
+						<a href="">
+							<% out.print( oneorder.title); %>
+						</a>
+							<ul>
+							<li class="t1">Work Period:</li>
+							<li><% out.print( oneorder.workPeriod); %></li>
+							<li class="t2">Type:</li>
+							<li><% out.print( oneorder.type); %></li>
+							<li class="t1">Location:</li>
+							<li><% out.print( oneorder.location); %></li>
+							<li class="t2">Salary:</li>
+							<li><% out.print( oneorder.salary); %></li>
+							<li class="t1">Publish Date:</li>
+							<li><% out.print( oneorder.publishTime); %></li>
+							<li class="t2">Deadline:</li>
+							<li><% out.print( oneorder.deadline); %></li>
+						</ul>
+					</div>
+				</div>
+			<%
+			}
+			%>
+			</div>
         </div>
     </div>
     <div class="share">

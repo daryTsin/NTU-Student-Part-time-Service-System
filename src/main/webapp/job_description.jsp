@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
+<%@ page import="pojo.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,12 +31,18 @@
 
 <body>
 
-    <c:if test="${sessionScope.usertype} == 'student'">
-        <%@ include file="z_header_for_stu.jsp"%>
-    </c:if>
-    <c:if test="${sessionScope.usertype} == 'merchant'">
-        <%@ include file="z_header_for_mer.jsp"%>
-    </c:if>
+    <%
+	if (session.getAttribute("usertype") == "student") {
+	%>
+    <%@ include file="z_header_for_stu.jsp"%>
+	<%
+	}
+	else {
+	%>
+     <%@ include file="z_header_for_mer.jsp"%>
+	<%
+	}
+	%>
 
     <div class="content w">
         <div class="subtitle">
@@ -45,42 +53,50 @@
                 <img src="images/restaurant.jfif" alt="">
             </div>
             <div class="right">
-                <h2>${OrderDetail.order.title}</h2>
+			<% 
+			OrderInfo oneorder = (OrderInfo) request.getAttribute("order");
+			%>
+                <h2><% out.print( oneorder.title); %></h2>
                 <ul class="l1">
                     <li class="t1">Type:</li>
-                    <li>${OrderDetail.order.type}</li>
+                    <li><% out.print( oneorder.type); %></li>
                     <li class="t2">Salary:</li>
-                    <li>${OrderDetail.order.salary}</li>
+                    <li><% out.print( oneorder.salary); %></li>
                     <li class="t1">Status:</li>
-                    <li>${OrderDetail.order.status}</li>
+                    <li><% out.print( oneorder.status); %></li>
                     <li class="t2">Staff Number:</li>
-                    <li>${OrderDetail.order.staffNumber}</li>
+                    <li><% out.print( oneorder.staffNumber); %></li>
                     <li class="t1">Deadline:</li>
-                    <li>${OrderDetail.order.deadline}</li>
+                    <li><% out.print( oneorder.deadline); %></li>
                     <li class="t2">Published time:</li>
-                    <li>${OrderDetail.order.publishTime}</li>
+                    <li><% out.print( oneorder.publishTime); %></li>
                     <li class="t1">Location:</li>
-                    <li>${OrderDetail.order.location}</li>
+                    <li><% out.print( oneorder.location); %></li>
                     <li class="t2">Work Period:</li>
-                    <li>${OrderDetail.order.workPeriod}</li>
+                    <li><% out.print( oneorder.workPeriod); %></li>
                 </ul>
                 <span>Descriptions:</span>
                 <p>
-                    ${OrderDetail.order.content}
+                    <% out.print( oneorder.content); %>
                 </p>
             </div>
         </div>
         <!-- 判断：加button -->
-        <c:if test="${sessionScope.usertype} == 'student'">
-            <div class="operation">
-                <form action="OrderApply" method="get">
-                    <input type="submit" name="apply" value="Apply" class="apply" />
-                </form>
-                <form action=" OrderCollect" method="get">
-                    <input type="submit" name="favorite" value="Favorite" class="favorite" />
-                </form>
-            </div>
-        </c:if>
+		<%
+		if (session.getAttribute("usertype") == "student") {
+		%>
+		<div class="operation">
+            <form action="OrderApply" method="get">
+                <input type="submit" name="apply" value="Apply" class="apply" />
+            </form>
+            <form action=" OrderCollect" method="get">
+                <input type="submit" name="favorite" value="Favorite" class="favorite" />
+            </form>
+        </div>
+		<%
+		}
+		%>
+		
     </div>
     <div class=" share">
         <div class="slidebar">
@@ -107,13 +123,13 @@
 
         var apply = document.querySelector('.apply');
         apply.onclick = function () {
-            alert('\n' + ${ OrderApply.result });
+            alert('\n' + request.getAttribute("result"); %>);
         }
 
 
         var favorite = document.querySelector('.favorite');
         favorite.onclick = function () {
-            alert('\n' + ${ OrderCollect.result });
+            alert('\n' + request.getAttribute("result"); %>);
         }
     </script>
 </body>

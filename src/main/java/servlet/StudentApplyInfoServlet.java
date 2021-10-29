@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import pojo.*;
 import service.OrderService;
@@ -34,8 +35,16 @@ public class StudentApplyInfoServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		
+		HttpSession session = request.getSession();       
+		Integer merchantId = 0;
+		if(session.getAttribute("userid") == null) {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else {
+			merchantId = (Integer) session.getAttribute("userid");
+		}
         
-		Integer merchantId = Integer.parseInt( request.getParameter("merchantId"));
+		
 		String status =  request.getParameter("status");
 		if(merchantId == null) {
 			merchantId = 2;
@@ -44,6 +53,7 @@ public class StudentApplyInfoServlet extends HttpServlet {
 		List<StudentApplyInfo> orders = OrderService.getApplyStudentByMerchant(merchantId, status);
 		out.print(orders);
 		request.setAttribute("orders", orders);
+		request.getRequestDispatcher("waitinglist.jsp").forward(request, response);
 	}
 
 	/**

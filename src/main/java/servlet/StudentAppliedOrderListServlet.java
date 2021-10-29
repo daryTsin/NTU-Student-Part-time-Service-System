@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import pojo.OrderInfo;
 import pojo.StudentApplyInfo;
@@ -35,11 +36,18 @@ public class StudentAppliedOrderListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();       
+		Integer studentId = 0;
+		if(session.getAttribute("userid") == null) {
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}else {
+			studentId = (Integer) session.getAttribute("userid");
+		}
         
-		Integer studentId = (Integer) request.getAttribute("studentId");
-		String status = (String) request.getAttribute("status");
-		//String type = (String) request.getAttribute("type");
-		String search = (String) request.getAttribute("search");
+		
+		String status = (String) request.getParameter("status");
+		//String type = (String) request.getParameter("type");
+		String search = (String) request.getParameter("search");
 		
 		studentId =1;
 		status ="Completed";
@@ -52,6 +60,7 @@ public class StudentAppliedOrderListServlet extends HttpServlet {
 		List<StudentApplyInfo> appliedorders = OrderService.getApplyMerchantByStudent(studentId, status, search);
 		out.print(appliedorders);
 		request.setAttribute("appliedorders", appliedorders);
+		request.getRequestDispatcher("applied.jsp").forward(request, response);
 
 	}
 

@@ -56,24 +56,6 @@
                 document.document.querySelector('.msg').innerHTML = 'The account or password is incorrect.';
             }
             if (result == 'login success') {
-                var username = document.querySelector('#account').value;
-                var usertype = document.querySelector('#account').value;
-
-                var radios = document.getElementsByName("radio");
-                for (radio in radios) {
-                    if (radios[radio].checked) {
-                        if (radios[radio].id == "stu") {
-                        	alert('!');
-                            < c:set scope="session" var="usertype" > "student"</c:set >
-                        }
-                        else {
-                            < c:set scope="session" var="usertype" > "merchant"</c:set >
-                        }
-                    }
-                    
-
-                }
-                < c:set scope="session" var="username" > username</c:set >
                 window.location.replace("home.jsp")
             }
         }
