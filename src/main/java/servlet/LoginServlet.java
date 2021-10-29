@@ -42,8 +42,9 @@ public class LoginServlet extends HttpServlet {
 		String account = (String) request.getParameter("account");
 
 		String password = (String) request.getParameter("password");
-		
-		//get session object
+//		out.print(account);
+//		out.print(password);
+//		//get session object
 		HttpSession session = request.getSession();       
 
 		//set one attribute of session
@@ -51,21 +52,22 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("account", account);
 		session.setAttribute("password", password);
 
-		//get one attribute of session
-		out.println("Time of logging in£º" +(Date)session.getAttribute("loginTime"));    
-		
-
+//		//get one attribute of session
+////		out.println("Time of logging inÂ£Âº" +(Date)session.getAttribute("loginTime"));    
+//		
+//
 		Userinfo user = LoginService.login(account, password);
-		
+//		
+//	
 		out.print(user);
 		if(user == null) {
 			request.setAttribute("result", "login fail");
+			request.getRequestDispatcher("login.jsp").forward(request, response); 
 		}else {
-			request.setAttribute("result", "login success");
 			session.setAttribute("userid", user.id);
-			session.setAttribute("usertype", user.type);
-			request.getRequestDispatcher("/GetOrders").forward(request, response);
-			
+			request.setAttribute("result", "login success");
+//			request.getRequestDispatcher("PublishOrder.jsp").forward(request, response); 
+			request.getRequestDispatcher("UpdateUser.jsp").forward(request, response); 
 		}
 		
 	}
