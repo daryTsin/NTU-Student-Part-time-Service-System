@@ -93,7 +93,9 @@ public class UpdateUserServlet extends HttpServlet {
 			request.setAttribute("result", "update fail");
 		}
 		String result = (String)request.getAttribute("result");
-		out.print(result);
+		
+		//redirect to apply order
+		request.getRequestDispatcher("/OrderApply").forward(request, response); 
 	}
 
 	/**

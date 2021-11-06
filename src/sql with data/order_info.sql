@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 25/10/2021 17:16:09
+ Date: 30/10/2021 22:50:49
 */
 
 SET NAMES utf8mb4;
@@ -38,12 +38,13 @@ CREATE TABLE `order_info`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `merchant`(`merchant_id`) USING BTREE,
   CONSTRAINT `merchant` FOREIGN KEY (`merchant_id`) REFERENCES `user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES (1, 2, 'title1', 'content1', 'location1', 'postCode', 'workPeriod', '2021-10-23 00:00:00', 1.10, 'type', 20, '2021-11-30 00:00:00', 'processing');
-INSERT INTO `order_info` VALUES (2, 2, 'title2', 'content2', 'location2', 'postCode2', 'workPeriod2', '2021-10-23 20:39:19', 1.10, 'type', 20, '2021-11-30 00:00:00', 'processing');
+INSERT INTO `order_info` VALUES (1, 2, 'cleaner', 'clean the kitchen and stores', 'Marina Bay', '381002', 'once a week', '2021-10-30 22:46:56', 10.00, 'hotel', 5, '2021-11-30 00:00:00', 'processing');
+INSERT INTO `order_info` VALUES (2, 2, 'cashier', 'need beauttiful and enthusiastic', 'Pasir Ris', '519943', 'every Monday', '2021-10-30 22:46:58', 15.00, 'store', 10, '2021-11-30 00:00:00', 'processing');
+INSERT INTO `order_info` VALUES (3, 5, 'waiter needed', 'work hard and patient', 'Kallang', '474826', 'On weekdays', '2021-10-30 22:47:14', 20.00, 'store', 20, '2021-11-25 22:47:05', 'processing');
 
 SET FOREIGN_KEY_CHECKS = 1;

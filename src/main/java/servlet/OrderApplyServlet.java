@@ -45,7 +45,7 @@ public class OrderApplyServlet extends HttpServlet {
 		String res = OrderService.applyOrder(studentId, orderId, remark);
 		out.print(res);
 		request.setAttribute("result", res);
-		
+		request.getRequestDispatcher("/StudentAppliedOrderList").forward(request, response);
 	}
 
 	/**

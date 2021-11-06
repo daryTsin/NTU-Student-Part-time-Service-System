@@ -37,7 +37,7 @@ public class StudentAppliedOrderListServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();       
-		Integer studentId = 0;
+		Integer studentId = 1;
 		if(session.getAttribute("userid") == null) {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
@@ -49,7 +49,7 @@ public class StudentAppliedOrderListServlet extends HttpServlet {
 		//String type = (String) request.getParameter("type");
 		String search = (String) request.getParameter("search");
 		
-		studentId =1;
+
 		status ="Completed";
 		search = "title";
 		

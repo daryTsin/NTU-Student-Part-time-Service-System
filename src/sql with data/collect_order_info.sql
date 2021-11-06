@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 25/10/2021 17:15:43
+ Date: 30/10/2021 22:50:41
 */
 
 SET NAMES utf8mb4;
@@ -35,5 +35,10 @@ CREATE TABLE `collect_order_info`  (
 -- ----------------------------
 -- Records of collect_order_info
 -- ----------------------------
+INSERT INTO `collect_order_info` VALUES (3, 1, 1);
+INSERT INTO `collect_order_info` VALUES (4, 1, 2);
+INSERT INTO `collect_order_info` VALUES (5, 3, 1);
+INSERT INTO `collect_order_info` VALUES (6, 4, 1);
+INSERT INTO `collect_order_info` VALUES (7, 4, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;
