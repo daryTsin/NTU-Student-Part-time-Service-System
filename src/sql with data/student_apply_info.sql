@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 25/10/2021 17:16:33
+ Date: 30/10/2021 22:51:00
 */
 
 SET NAMES utf8mb4;
@@ -32,12 +32,15 @@ CREATE TABLE `student_apply_info`  (
   INDEX `fore_order`(`order_id`) USING BTREE,
   CONSTRAINT `fore_order` FOREIGN KEY (`order_id`) REFERENCES `order_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fore_student` FOREIGN KEY (`student_id`) REFERENCES `user_info` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student_apply_info
 -- ----------------------------
-INSERT INTO `student_apply_info` VALUES (1, 1, 1, NULL, NULL);
+INSERT INTO `student_apply_info` VALUES (1, 1, 1, 'processing', 'I am working hard and patiently');
 INSERT INTO `student_apply_info` VALUES (2, 1, 2, 'completed', NULL);
+INSERT INTO `student_apply_info` VALUES (4, 3, 1, 'approved', 'I am good ');
+INSERT INTO `student_apply_info` VALUES (5, 4, 1, 'processing', NULL);
+INSERT INTO `student_apply_info` VALUES (6, 4, 2, 'rejected', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
